@@ -57,5 +57,16 @@ namespace GradingSystem
             }
             return students;
         }
+
+        public void WriteReportToFile(List<Student> students, string outputFilePath)
+        {
+            using (StreamWriter sw = new StreamWriter(outputFilePath))
+            {
+                foreach (var student in students)
+                {
+                    sw.WriteLine($"{student.Id}, {student.FullName}, {student.Score}, {student.GetGrade()}");
+                }
+            }
+        }
     }
 }
