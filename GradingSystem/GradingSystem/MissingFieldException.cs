@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace GradingSystem
 {
-    public class MisiingFieldException : Exception
+    public class MissingFieldException : Exception
     {
-        public MisiingFieldException()
+        public MissingFieldException()
             : base("A required field is missing. Please ensure all fields are filled out correctly.")
         {
         }
-        public MisiingFieldException(string message)
+        public MissingFieldException(string message)
             : base(message)
         {
         }
-        public MisiingFieldException(string message, Exception inner)
+        public MissingFieldException(string message, Exception inner)
             : base(message, inner)
         {
         }

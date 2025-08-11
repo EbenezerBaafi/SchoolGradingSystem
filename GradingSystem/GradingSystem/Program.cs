@@ -11,8 +11,8 @@ namespace GradingSystem
             Console.WriteLine("\nWelcome to the School Grading System!");
 
 
-            string inputFilePath = "C:/Users/Gadget Store/Desktop/csharp/example.txt"; // Path to the input file
-            string outputFilePath = "report.txt"; // Path to the output file
+            string inputFilePath = "C:\\Users\\GADGET STORE\\source\\repos\\SchoolGradingSystem\\GradingSystem\\GradingSystem\\Students.txt"; // Path to the input file
+            string outputFilePath = "C:\\Users\\GADGET STORE\\source\\repos\\SchoolGradingSystem\\GradingSystem\\GradingSystem\\Report.txt"; // Path to the output file
 
             StudentResultProcessor processor = new StudentResultProcessor();
 
@@ -20,14 +20,24 @@ namespace GradingSystem
             {
                 // Read students from the input file
                 var students = processor.ReadStudentsFromFile(inputFilePath);
+                Console.WriteLine($"Number of students read: {students.Count}"); // Add this line
+
+
+                // write the report to the output file
                 processor.WriteReportToFile(students, outputFilePath);
-                Console.WriteLine("Report generated successfully!");
+                Console.WriteLine($"Report generated successfully: {outputFilePath}\n");
+
+                // Display the report
+                Console.WriteLine("Student Report:");
+                string reportContent = File.ReadAllText(outputFilePath);
+                Console.WriteLine($"Report content legth: {reportContent.Length}");
+                Console.WriteLine(reportContent);
             }
             catch (FileNotFoundException ex)
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
-            catch (MisiingFieldException ex)
+            catch (MissingFieldException ex)
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }

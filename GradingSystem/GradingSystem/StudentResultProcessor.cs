@@ -25,7 +25,7 @@ namespace GradingSystem
                     // validate the number of fields
                     if (parts.Length != 3)
                     {
-                        throw new MisiingFieldException($"Line {LineNumber}: Expected 3 fields but found {parts.Length}.");
+                        throw new MissingFieldException($"Line {LineNumber}: Expected 3 fields but found {parts.Length}.");
                     }
 
                     string Id = parts[0].Trim();
@@ -38,12 +38,6 @@ namespace GradingSystem
                         throw new InvalidScoreFormatException($"Line {LineNumber}: Invalid score format for '{Score}'. Must be an integer.");
                     }
 
-                    // checks if the length of the fields are valid
-                    if (parts.Length < 3 || parts.Length > 3)
-                    {
-                        throw new MisiingFieldException($"Line {LineNumber}: Expected 3 fields but found {parts.Length}.");
-                    }
-
 
                     // Try converting Score to an integer
                     if (!int.TryParse(Score, out int score) || score < 0 || score > 100)
@@ -53,18 +47,20 @@ namespace GradingSystem
 
                     // Create a new Student object and add it to the list
                     var student = new Student(id, FullName, score);
+                    students.Add(student);
                 }
             }
             return students;
         }
 
-        public void WriteReportToFile(List<Student> students, string outputFilePath)
+        public  void WriteReportToFile(List<Student> students, string outputFilePath)
         {
             using (StreamWriter sw = new StreamWriter(outputFilePath))
             {
-                foreach (var student in students)
+                foreach (var student in students) 
                 {
-                    sw.WriteLine($"{student.Id}, {student.FullName}, {student.Score}, {student.GetGrade()}");
+                    sw.WriteLine ($"{student.Id}, {student.FullName}, {student.Score}, {student.GetGrade()}");
+                    
                 }
             }
         }
